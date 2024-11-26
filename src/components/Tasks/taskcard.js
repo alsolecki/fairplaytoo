@@ -1,15 +1,4 @@
-import './App.css'
-import { useState } from 'react'
-
-import { DndContext, closestCorners } from '@dnd-kit/core'
-import { arrayMove } from '@dnd-kit/sortable'
-import Column from './components/Column'
-import ColumnLeft from './components/ColumnLeft'
-import ColumnRight from './components/ColumnRight'
-
-function App() {
-
-  const taskcards = [
+const taskcards = [
     { id: 1, place: "Home", title: "Childcare Helpers(kids)", daily: "yes" },
     { id: 2, place: "Home", title: "Cleaning", daily: "no" },
     { id: 3, place: "Home", title: "Dishes", daily: "yes" },
@@ -111,46 +100,4 @@ function App() {
     { id: 98, place: "Wild", title: "Welcoming A Child Into The Home", daily: "no" },
     { id: 99, place: "Unicorn Space", title: "Unicorn Space (P1)", daily: "no" },
     { id: 100, place: "Unicorn Space", title: "Unicorn Space (P2)", daily: "no" }
-  ]
-
-
-  const [tasks, setTasks] = useState(taskcards)
-
-
-  const [lisaTasks, setLisaTasks] = useState([
-  ])
-
-  const [alexTasks, setAlexTasks] = useState([
-  ])
-
-  const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
-
-  const handleDragEnd = event => {
-    const { active, over } = event;
-
-    if (active.id === over.id) return;
-
-    setTasks((tasks) => {
-      const originalPos = getTaskPos(active.id);
-      const newPos = getTaskPos(over.id);
-      return arrayMove(tasks, originalPos, newPos);
-    })
-  }
-
-  return (
-    <>
-      <h1>Fair Play @ nine911</h1>
-      <DndContext
-        onDragEnd={handleDragEnd}
-        collisionDetection={closestCorners}>
-        <div className="column-container">
-          <ColumnLeft tasks={lisaTasks} />
-          <Column tasks={tasks} />
-          <ColumnRight tasks={alexTasks} />
-        </div>
-      </DndContext>
-    </>
-  )
-}
-
-export default App
+]
